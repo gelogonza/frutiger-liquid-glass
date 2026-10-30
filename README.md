@@ -2,7 +2,9 @@
 
 A desktop companion for the Frutiger Obsidian theme. It renders a local blue-sky landscape through WebGL2 glass surfaces behind Obsidian's native text and controls.
 
-![Frutiger with Liquid Glass in a sample vault](screenshots/combined.jpg)
+[Install Frutiger Liquid Glass](https://community.obsidian.md/plugins/frutiger-liquid-glass) · [Install the Frutiger theme](https://community.obsidian.md/themes/frutiger)
+
+![Frutiger with Liquid Glass](screenshots/promo.jpg)
 
 ## Status
 
@@ -10,7 +12,7 @@ Version 0.1.1 is published on GitHub. It was tested locally in a clean sample va
 
 ## Use
 
-After the community release, install **Frutiger Liquid Glass** from Settings → Community plugins. Enable it and select the Frutiger theme in Settings → Appearance. In the plugin settings, you can enable or disable the shader and adjust refraction strength, glass edge thickness, color dispersion, and reflection brightness. The command palette also has **Frutiger Liquid Glass: Toggle shader glass**.
+Install **Frutiger Liquid Glass** from Settings → Community plugins. Enable it and select the Frutiger theme in Settings → Appearance. In the plugin settings, you can enable or disable the shader and adjust refraction strength, glass edge thickness, color dispersion, and reflection brightness. The command palette also has **Frutiger Liquid Glass: Toggle shader glass**.
 
 For local testing, copy `main.js`, `manifest.json`, and `styles.css` into `<vault>/.obsidian/plugins/frutiger-liquid-glass/`, then enable it in Community plugins.
 
