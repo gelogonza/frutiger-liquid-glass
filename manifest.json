@@ -1,9 +1,9 @@
 {
   "id": "frutiger-liquid-glass",
   "name": "Frutiger Liquid Glass",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "minAppVersion": "1.14.5",
-  "description": "Add WebGL2 glass and a Frutiger Aero landscape to desktop Obsidian.",
+  "description": "Add WebGL2 glass and a Frutiger Aero landscape to the desktop workspace.",
   "author": "Angelo Gonzalez",
   "authorUrl": "https://angelogonza.com",
   "isDesktopOnly": true

@@ -1,6 +1,8 @@
-# Frutiger Liquid Glass 0.1.0
+# Frutiger Liquid Glass 0.1.1
 
 First public release candidate of the desktop WebGL2 glass companion for the Frutiger Obsidian theme.
+
+This update uses a Community Directory compliant manifest description and adds reproducible build metadata.
 
 - Bundled local Aero landscape with refracted sidebars, active tabs, and note panes.
 - Adjustable refraction strength, glass edge thickness, color dispersion, and reflection brightness.

@@ -6,7 +6,7 @@ A desktop companion for the Frutiger Obsidian theme. It renders a local blue-sky
 
 ## Status
 
-Version 0.1.0 is published on GitHub. It was tested locally in a clean sample vault with the Frutiger theme on macOS Obsidian 1.14.5. The screenshot uses sample notes only. Obsidian Community review is still pending.
+Version 0.1.1 is published on GitHub. It was tested locally in a clean sample vault with the Frutiger theme on macOS Obsidian 1.14.5. The screenshot uses sample notes only. Obsidian Community review is still pending.
 
 ## Use
 
@@ -29,5 +29,5 @@ The committed `main.js` is reproducible from `main.template.js`, `shaders/`, and
 - [x] Test with Frutiger in a clean vault, including enable, settings, disable, and fallback.
 - [x] Capture a screenshot using only sample notes.
 - [x] Publish the source in a public GitHub repository.
-- [x] Create release `0.1.0` and attach `main.js`, `manifest.json`, and `styles.css` as individual assets.
+- [x] Create release `0.1.1` and attach `main.js`, `manifest.json`, and `styles.css` as individual assets.
 - [ ] Submit the repository through [Obsidian Community](https://community.obsidian.md) and address review feedback.
