@@ -8,7 +8,7 @@ A desktop companion for the Frutiger Obsidian theme. It renders a local blue-sky
 
 ## Status
 
-Version 0.1.1 is available through Obsidian Community and GitHub. Version 0.2.0 is in local testing. The screenshot uses sample notes only.
+Version 0.2.0 is available through Obsidian Community and GitHub. The screenshot uses sample notes only.
 
 ## Use
 
@@ -35,4 +35,4 @@ The committed `main.js` is reproducible from `main.template.js`, `shaders/`, and
 - [x] Publish the source in a public GitHub repository.
 - [x] Create release `0.1.1` and attach `main.js`, `manifest.json`, and `styles.css` as individual assets.
 - [x] Publish through [Obsidian Community](https://community.obsidian.md/plugins/frutiger-liquid-glass).
-- [ ] Release and test version `0.2.0` with synchronized wallpaper presets.
+- [x] Release and test version `0.2.0` with synchronized wallpaper presets.
