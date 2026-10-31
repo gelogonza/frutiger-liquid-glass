@@ -275,6 +275,18 @@ class GlassSettings extends PluginSettingTab {
     const {containerEl}=this; containerEl.empty();
     containerEl.createEl('h2',{text:'Frutiger Liquid Glass'});
     containerEl.createEl('p',{text:'Refracts the local Aero wallpaper through native interface surfaces. Note text stays native. No notes, desktop, or screen captures are sampled.'});
+    const intro=containerEl.createDiv({cls:'frutiger-liquid-glass-intro'});
+    intro.createEl('h3',{text:'Getting started'});
+    const steps=intro.createEl('ol');
+    const themeStep=steps.createEl('li');
+    themeStep.appendText('Install and select the ');
+    const themeLink=themeStep.createEl('a',{text:'Frutiger theme',href:'https://community.obsidian.md/themes/frutiger'});
+    themeLink.setAttr('target','_blank');
+    themeLink.setAttr('rel','noopener');
+    themeStep.appendText(' under Settings → Appearance → Themes.');
+    steps.createEl('li',{text:'Keep this plugin enabled under Settings → Community plugins.'});
+    steps.createEl('li',{text:'Use the controls below to tune refraction, glass edges, color dispersion, and reflections.'});
+    intro.createEl('p',{text:'Frutiger Liquid Glass is an optional desktop-only companion. The Frutiger theme works independently on desktop and mobile.'});
     new Setting(containerEl).setName('Enable shader glass').setDesc('Turn off to restore your CSS glass preset.').addToggle(toggle=>toggle.setValue(this.plugin.settings.enabled).onChange(async value=>{this.plugin.settings.enabled=value;await this.plugin.saveData(this.plugin.settings);this.plugin.restart();}));
     for(const [key,name,min,max,step] of [['strength','Refraction strength',0,0.08,0.005],['thickness','Glass edge thickness',5,50,1],['dispersion','Color dispersion',0,15,0.5],['glare','Reflection brightness',0,1,0.05]]) {
       new Setting(containerEl).setName(name).addSlider(slider=>slider.setLimits(min,max,step).setValue(this.plugin.settings[key]).setDynamicTooltip().onChange(async value=>{this.plugin.settings[key]=value;await this.plugin.saveData(this.plugin.settings);this.plugin.renderer?.schedule();}));

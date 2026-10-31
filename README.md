@@ -8,7 +8,7 @@ A desktop companion for the Frutiger Obsidian theme. It renders a local blue-sky
 
 ## Status
 
-Version 0.2.0 is available through Obsidian Community and GitHub. The screenshot uses sample notes only.
+Version 0.2.1 is available through Obsidian Community and GitHub. The screenshot uses sample notes only.
 
 ## Use
 
@@ -27,12 +27,3 @@ The plugin uses a bundled landscape image. It does not capture the desktop or no
 The WebGL shader is adapted from [Liquid Glass Studio](https://github.com/iyinchao/liquid-glass-studio) by Charles Yin (MIT). See [NOTICE.md](NOTICE.md) and [LICENSE](LICENSE). The Obsidian lifecycle, multi-surface geometry, wallpaper treatment, and CSS integration were added for this plugin.
 
 The committed `main.js` is reproducible from `main.template.js`, `shaders/`, and `aero-landscape.jpg` with `npm run build`. No package installation is needed to build it. `npm run check` verifies JavaScript syntax.
-
-## Release checklist
-
-- [x] Test with Frutiger in a clean vault, including enable, settings, disable, and fallback.
-- [x] Capture a screenshot using only sample notes.
-- [x] Publish the source in a public GitHub repository.
-- [x] Create release `0.1.1` and attach `main.js`, `manifest.json`, and `styles.css` as individual assets.
-- [x] Publish through [Obsidian Community](https://community.obsidian.md/plugins/frutiger-liquid-glass).
-- [x] Release and test version `0.2.0` with synchronized wallpaper presets.

@@ -1,3 +1,15 @@
+.frutiger-liquid-glass-intro {
+  margin: 1rem 0 1.25rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-secondary);
+}
+.frutiger-liquid-glass-intro h3 { margin: 0 0 0.55rem; }
+.frutiger-liquid-glass-intro ol { margin: 0.4rem 0 0.65rem; padding-inline-start: 1.35rem; }
+.frutiger-liquid-glass-intro li + li { margin-top: 0.3rem; }
+.frutiger-liquid-glass-intro p:last-child { margin-bottom: 0; color: var(--text-muted); }
+
 .frutiger-liquid-glass-canvas {
   position: absolute !important;
   inset: 0;
