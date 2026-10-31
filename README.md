@@ -8,11 +8,13 @@ A desktop companion for the Frutiger Obsidian theme. It renders a local blue-sky
 
 ## Status
 
-Version 0.1.1 is published on GitHub. It was tested locally in a clean sample vault with the Frutiger theme on macOS Obsidian 1.14.5. The screenshot uses sample notes only. Obsidian Community review is still pending.
+Version 0.1.1 is available through Obsidian Community and GitHub. Version 0.2.0 is in local testing. The screenshot uses sample notes only.
 
 ## Use
 
 Install **Frutiger Liquid Glass** from Settings → Community plugins. Enable it and select the Frutiger theme in Settings → Appearance. In the plugin settings, you can enable or disable the shader and adjust refraction strength, glass edge thickness, color dispersion, and reflection brightness. The command palette also has **Frutiger Liquid Glass: Toggle shader glass**.
+
+With the **Style Settings** plugin installed, choose a Frutiger wallpaper or the DORFic style under Settings → Style Settings. Liquid Glass detects the theme's shared body classes and redraws its WebGL backdrop automatically. Aero Landscape uses the bundled image; Aqua Current, Glass Bubbles, and DORFic Daylight are generated locally.
 
 For local testing, copy `main.js`, `manifest.json`, and `styles.css` into `<vault>/.obsidian/plugins/frutiger-liquid-glass/`, then enable it in Community plugins.
 
@@ -32,4 +34,5 @@ The committed `main.js` is reproducible from `main.template.js`, `shaders/`, and
 - [x] Capture a screenshot using only sample notes.
 - [x] Publish the source in a public GitHub repository.
 - [x] Create release `0.1.1` and attach `main.js`, `manifest.json`, and `styles.css` as individual assets.
-- [ ] Submit the repository through [Obsidian Community](https://community.obsidian.md) and address review feedback.
+- [x] Publish through [Obsidian Community](https://community.obsidian.md/plugins/frutiger-liquid-glass).
+- [ ] Release and test version `0.2.0` with synchronized wallpaper presets.

@@ -1,3 +1,12 @@
+# Frutiger Liquid Glass 0.2.0
+
+- Synchronizes with Frutiger 0.2.0 Style Settings wallpaper classes.
+- Adds local WebGL versions of Aqua Current, Glass Bubbles, and DORFic Daylight.
+- Adds a warm DORFic shader tint and redraws immediately when Style Settings changes.
+- Keeps the original Aero landscape as the default.
+
+The added presets are generated locally and introduce no network requests.
+
 # Frutiger Liquid Glass 0.1.1
 
 First public release candidate of the desktop WebGL2 glass companion for the Frutiger Obsidian theme.

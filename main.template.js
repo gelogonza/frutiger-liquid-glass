@@ -115,6 +115,56 @@ class GlassRenderer {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, canvas);
   }
+  wallpaperPreset() {
+    const classes = this.doc.body.classList;
+    if (classes.contains('frutiger-wallpaper-dorfic')) return 'dorfic';
+    if (classes.contains('frutiger-wallpaper-bubbles')) return 'bubbles';
+    if (classes.contains('frutiger-wallpaper-aqua')) return 'aqua';
+    return 'aero';
+  }
+  paintGeneratedBackdrop(ctx, w, h, preset) {
+    const gradient = ctx.createLinearGradient(0, 0, w, h);
+    if (preset === 'dorfic') {
+      gradient.addColorStop(0, '#741c08'); gradient.addColorStop(0.32, '#ef4c13');
+      gradient.addColorStop(0.58, '#ff9d18'); gradient.addColorStop(0.76, '#f7f1e6'); gradient.addColorStop(1, '#31383b');
+      ctx.fillStyle = gradient; ctx.fillRect(0, 0, w, h);
+      ctx.save();
+      ctx.globalAlpha = 0.7;
+      ctx.strokeStyle = '#fff7df'; ctx.lineWidth = Math.max(2, h * 0.006);
+      for (let i = -1; i < 5; i++) {
+        ctx.beginPath();
+        ctx.moveTo(w * (0.1 + i * 0.22), h * 1.1);
+        ctx.lineTo(w * (0.56 + i * 0.14), -h * 0.1);
+        ctx.stroke();
+      }
+      ctx.fillStyle = '#fff7e5cc'; ctx.beginPath(); ctx.arc(w * 0.77, h * 0.2, h * 0.075, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#ffb32f'; ctx.lineWidth = h * 0.025; ctx.beginPath(); ctx.arc(w * 0.77, h * 0.2, h * 0.13, 0, Math.PI * 2); ctx.stroke();
+      ctx.restore();
+      return;
+    }
+    gradient.addColorStop(0, preset === 'aqua' ? '#0369c8' : '#0872c7');
+    gradient.addColorStop(0.42, preset === 'aqua' ? '#19b9e6' : '#34c7ef');
+    gradient.addColorStop(0.72, preset === 'aqua' ? '#64e0d0' : '#78e3cc');
+    gradient.addColorStop(1, preset === 'aqua' ? '#4bb34f' : '#67ba52');
+    ctx.fillStyle = gradient; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 4; i++) {
+      ctx.beginPath(); ctx.moveTo(-w * 0.2, h * (0.5 + i * 0.14));
+      ctx.bezierCurveTo(w * 0.25, h * (0.15 + i * 0.2), w * 0.6, h * (1.3 - i * 0.1), w * 1.2, h * (0.24 + i * 0.17));
+      ctx.lineWidth = h * (0.02 + i * 0.015); ctx.strokeStyle = ['#ffffff66','#eaffff66','#1bbadb44','#a6f07966'][i]; ctx.stroke();
+    }
+    const bubbles = preset === 'bubbles'
+      ? [[.12,.24,.13],[.33,.68,.08],[.55,.16,.06],[.78,.82,.26],[.87,.32,.12]]
+      : [[.12,.24,.13],[.86,.22,.2],[.78,.82,.26]];
+    for (const [x,y,r] of bubbles) {
+      const bubble = ctx.createRadialGradient(w*x,h*y,0,w*x,h*y,h*r);
+      bubble.addColorStop(0,'#ffffff88'); bubble.addColorStop(.72,'#c8ffff18'); bubble.addColorStop(1,'#ffffff00');
+      ctx.fillStyle=bubble; ctx.fillRect(0,0,w,h);
+      if (preset === 'bubbles') {
+        ctx.strokeStyle='#e7ffff80'; ctx.lineWidth=Math.max(1,h*.002);
+        ctx.beginPath(); ctx.arc(w*x,h*y,h*r*.82,0,Math.PI*2); ctx.stroke();
+      }
+    }
+  }
   backdrop() {
     const gl = this.gl;
     for (const texture of this.textures) gl.deleteTexture(texture);
@@ -123,35 +173,22 @@ class GlassRenderer {
     image.width = this.canvas.width; image.height = this.canvas.height;
     const ctx = image.getContext('2d');
     const w = image.width, h = image.height;
-    const sky = ctx.createLinearGradient(0,0,w,h);
-    sky.addColorStop(0, '#22b7e8'); sky.addColorStop(0.4,'#c3f3ff');
-    sky.addColorStop(0.72,'#48c6dc'); sky.addColorStop(1,'#7cde66');
-    ctx.fillStyle = sky; ctx.fillRect(0,0,w,h);
-    // Smooth wallpaper ribbons provide real texture detail for edge refraction.
-    for (let i=0;i<4;i++) {
-      ctx.beginPath(); ctx.moveTo(-w*0.2,h*(0.5+i*0.14));
-      ctx.bezierCurveTo(w*0.25,h*(0.15+i*0.2),w*0.6,h*(1.3-i*0.1),w*1.2,h*(0.24+i*0.17));
-      ctx.lineWidth = h*(0.02+i*0.015); ctx.strokeStyle = ['#ffffff66','#eaffff66','#1bbadb44','#a6f07966'][i]; ctx.stroke();
-    }
-    for (const [x,y,r] of [[.12,.24,.13],[.86,.22,.2],[.78,.82,.26]]) {
-      const bubble=ctx.createRadialGradient(w*x,h*y,0,w*x,h*y,h*r);
-      bubble.addColorStop(0,'#ffffff77'); bubble.addColorStop(.8,'#ffffff08'); bubble.addColorStop(1,'#ffffff00');
-      ctx.fillStyle=bubble; ctx.fillRect(0,0,w,h);
-    }
-    if (this.wallpaper) {
-      const image = this.wallpaper;
-      const scale = Math.max(w/image.naturalWidth,h/image.naturalHeight);
-      const iw=image.naturalWidth*scale, ih=image.naturalHeight*scale;
+    const preset = this.wallpaperPreset();
+    this.paintGeneratedBackdrop(ctx, w, h, preset);
+    if (preset === 'aero' && this.wallpaper) {
+      const source = this.wallpaper;
+      const scale = Math.max(w/source.naturalWidth,h/source.naturalHeight);
+      const iw=source.naturalWidth*scale, ih=source.naturalHeight*scale;
       const ox=(w-iw)/2, oy=(h-ih)/2;
-      ctx.drawImage(image,ox,oy,iw,ih);
+      ctx.drawImage(source,ox,oy,iw,ih);
       // Behind the reading pane, mirror the exact slice under the sidebar so both
       // show the same deep-blue sky and green field and meet without a seam.
       const split = Math.max(0,Math.min(w,this.wallpaperSplit ?? Math.round(w*0.42)));
-      const sx=Math.max(0,-ox/scale), sw=Math.max(1,Math.min(image.naturalWidth,(split-ox)/scale)-sx);
-      const sy=Math.max(0,-oy/scale), sh=Math.min(image.naturalHeight-sy,h/scale);
+      const sx=Math.max(0,-ox/scale), sw=Math.max(1,Math.min(source.naturalWidth,(split-ox)/scale)-sx);
+      const sy=Math.max(0,-oy/scale), sh=Math.min(source.naturalHeight-sy,h/scale);
       if (split < w) {
         ctx.save(); ctx.translate(w,0); ctx.scale(-1,1);
-        ctx.drawImage(image,sx,sy,sw,sh,0,0,w-split,h);
+        ctx.drawImage(source,sx,sy,sw,sh,0,0,w-split,h);
         ctx.restore();
       }
     }
@@ -198,7 +235,8 @@ class GlassRenderer {
     gl.uniform2f(this.location('u_mouse'),0,0); gl.uniform2f(this.location('u_mouseSpring'),0,0);
     this.float('u_mergeRate',0); this.float('u_shapeWidth',100); this.float('u_shapeHeight',50);
     this.float('u_shapeRadius',20); this.float('u_shapeRoundness',4);
-    gl.uniform4f(this.location('u_tint'),0.87,0.98,1,0.06);
+    const dorfic = this.doc.body.classList.contains('frutiger-style-dorfic') || this.wallpaperPreset() === 'dorfic';
+    gl.uniform4f(this.location('u_tint'), dorfic ? 1 : 0.87, dorfic ? 0.72 : 0.98, dorfic ? 0.42 : 1, dorfic ? 0.09 : 0.06);
     this.float('u_refThickness',this.settings.thickness);
     this.float('u_refDistance',this.settings.strength);
     this.float('u_refFactor',1.4); this.float('u_refDispersion',this.settings.dispersion);
@@ -251,6 +289,7 @@ module.exports = class FrutigerLiquidGlass extends Plugin {
     this.addSettingTab(new GlassSettings(this.app,this));
     this.addCommand({id:'toggle-glass',name:'Toggle shader glass',callback:async()=>{this.settings.enabled=!this.settings.enabled;await this.saveData(this.settings);this.restart();new Notice(this.settings.enabled?'Liquid Glass enabled':'CSS glass restored');}});
     this.registerEvent(this.app.workspace.on('layout-change',()=>{if(this.renderer){this.renderer.needsGeometry=true;this.renderer.schedule();}}));
+    this.registerEvent(this.app.workspace.on('css-change',()=>{if(this.renderer){this.renderer.backdropDirty=true;this.renderer.needsGeometry=true;this.renderer.schedule();}}));
     this.app.workspace.onLayoutReady(()=>{if(!this.unloaded)this.restart();});
   }
   restart() {
